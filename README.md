@@ -1,50 +1,57 @@
-# Welcome to your Expo app 👋
+# Expense Tracker App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![Expense Tracker App](https://github.com/user-attachments/assets/63361360-a6fb-4e5d-9d93-f807d83281ec)
 
-## Get started
+## Overview
 
-1. Install dependencies
+Build an Expense Tracker App in React Native with Firebase and Cloudinary. The features of this app include:
 
-   ```bash
+- **Authentication**
+- **Statistics**
+- **Wallet Management**
+- **Media Uploads**
+- **User Profile**
+- **Responsiveness**
+- **Cloudinary Integration**
+- **Firebase Database**
+- **Reanimated Animations**
+- **Cross-Platform Compatibility**
+- **And Many More...**
+
+## Technologies Used
+
+- **Expo**
+- **Reanimated**
+- **React Native**
+- **Firebase**
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   https://github.com/BEGDAR8ZOUHAIR/expense-tracker-app.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd expense-tracker-app
+   ```
+3. Install dependencies:
+   ```sh
    npm install
    ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
+4. Start the development server:
+   ```sh
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+## Contributing
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Contributions are welcome! Please follow the standard process for submitting pull requests.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## License
 
-## Get a fresh project
+This project is licensed under the MIT License.
 
-When you're ready, run:
+## Contact
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+For any inquiries, reach out to [Zouahir Begdar] at [begdar8zouhair@gmail.com].
