@@ -16,7 +16,11 @@ const login = () => {
 	const [loading, setLoading] = React.useState(false);
 	const router = useRouter();
 	const handleSumbit = () => {
-
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+			router.navigate('/auth/home');
+		}, 2000)
 	}
 
 	return (
