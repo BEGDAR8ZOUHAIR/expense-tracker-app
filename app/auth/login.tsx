@@ -9,18 +9,24 @@ import Typo from '@/components/Typo'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import { Link, useRouter } from 'expo-router'
+import { useAuth } from '@/contexts/authContext';
 
 const login = () => {
 	const emailRef = React.useRef('');
 	const passordRef = React.useRef('');
 	const [loading, setLoading] = React.useState(false);
 	const router = useRouter();
-	const handleSumbit = () => {
+	const { login: loginUser } = useAuth();
+
+	const handleSumbit = async () => {
 		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-			router.navigate('/auth/home');
-		}, 2000)
+		const res = await loginUser(emailRef.current, passordRef.current);
+		setLoading(false);
+		if (res.success) {
+			router.navigate('/(tabs)');
+		} else {
+			alert(res.msg)
+		}
 	}
 
 	return (
@@ -105,3 +111,7 @@ const styles = StyleSheet.create({
 		fontSize: verticalScale(14),
 	}
 })
+
+function loginUser(current: string, current1: string) {
+	throw new Error('Function not implemented.');
+}

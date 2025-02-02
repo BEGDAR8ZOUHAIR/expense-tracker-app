@@ -20,6 +20,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 					email: firebaseUser.email,
 					name: firebaseUser.displayName,
 				})
+				updateUserData(firebaseUser.uid);
 				router.replace('/(tabs)');
 			} else {
 				// user is signed out
@@ -37,6 +38,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 			return { success: true }
 		} catch (error: any) {
 			let msg = error.message;
+			console.log(msg);
+			if (msg === 'Firebase: Error (auth/invalid-credential).') {
+				msg = 'Wrong credentials'
+			}
+			if (msg === 'Firebase: Error (auth/user-not-found).') {
+				msg = 'User not found'
+			}
+			if (msg === 'Firebase: Error (auth/wrong-password).') {
+				msg = 'Wrong password'
+			}
+			if (msg === 'Firebase: Error (auth/too-many-requests).') {
+				msg = 'Too many requests'
+			}
+			if (msg === 'Firebase: Error (auth/invalid-email).') {
+				msg = 'Invalid email'
+			}
 			return { success: false, msg }
 		}
 	}
@@ -56,6 +73,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 		} catch (error: any) {
 			let msg = error.message;
+			if (msg === 'Firebase: Error (auth/email-already-in-use).') {
+				msg = 'Email already in use'
+			}
+			if (msg === 'Firebase: Error (auth/invalid-email).') {
+				msg = 'Invalid email'
+			}
 			return { success: false, msg }
 		}
 	}
