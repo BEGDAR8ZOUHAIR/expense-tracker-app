@@ -9,6 +9,7 @@ const _layout = () => {
 	)
 };
 
+
 export default function RootLayout() {
 	return (
 		<AuthProvider>
