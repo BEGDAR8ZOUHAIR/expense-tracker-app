@@ -9,6 +9,8 @@ import Typo from '@/components/Typo'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import { Link, useRouter } from 'expo-router'
+import { useAuth } from '@/contexts/authContext';
+
 
 const Register = () => {
 	const emailRef = React.useRef('');
@@ -16,12 +18,16 @@ const Register = () => {
 	const passordRef = React.useRef('');
 	const [loading, setLoading] = React.useState(false);
 	const router = useRouter();
-	const handleSumbit = () => {
+	const { register: registerUser } = useAuth();
+	const handleSumbit = async () => {
 		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
+		const res = await registerUser(emailRef.current, passordRef.current, nameRef.current);
+		setLoading(false);
+		if (res.success) {
 			router.navigate('/auth/login');
-		}, 2000)
+		} else {
+			alert(res.msg)
+		}
 	}
 
 	return (
