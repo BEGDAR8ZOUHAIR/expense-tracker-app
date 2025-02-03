@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { colors, spacingX, spacingY } from '@/constants/theme'
-import { Mailbox, Lock } from 'phosphor-react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { verticalScale } from '@/utils/styling'
 import BackButton from '@/components/BackButton'
 import Typo from '@/components/Typo'
@@ -42,12 +42,12 @@ const login = () => {
 				{/* form */}
 				<View style={styles.form}>
 					<Input
-						icon={<Mailbox color={colors.neutral300} />}
+						icon={<Ionicons name="mail" size={24} color={colors.neutral300} />}
 						placeholder='Enter your email'
 						onChangeText={(value) => (emailRef.current = value)}
 					/>
 					<Input
-						icon={<Lock color={colors.neutral300} />}
+						icon={<Ionicons name="lock-closed" size={24} color={colors.neutral300} />}
 						placeholder='Enter your password'
 						secureTextEntry
 						onChangeText={(value) => (passordRef.current = value)}

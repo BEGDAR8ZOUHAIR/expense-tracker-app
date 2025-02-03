@@ -1,6 +1,5 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import { AntDesign, Feather } from '@expo/vector-icons';
 import TabBarButton from './TabBarButton';
 import { colors, radius, spacingX, spacingY } from '@/constants/theme';
 

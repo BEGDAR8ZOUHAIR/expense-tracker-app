@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { BackButtonProps } from '@/types'
 import { useRouter } from 'expo-router';
-import { Car, CaretLeft } from 'phosphor-react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { verticalScale } from '@/utils/styling';
 import { colors, radius } from '@/constants/theme';
 
@@ -11,7 +11,7 @@ const BackButton = ({ style, iconSize = 26 }: BackButtonProps
 	const router = useRouter();
 	return (
 		<TouchableOpacity style={[styles.backButton, style]} onPress={() => router.back()}>
-			<CaretLeft size={verticalScale(iconSize)} color={colors.white} weight='bold' />
+			<Ionicons name="arrow-back" size={iconSize} color={colors.text} />
 		</TouchableOpacity>
 	)
 }
