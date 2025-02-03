@@ -1,24 +1,37 @@
-import { Dimensions, Platform, StatusBar, View } from 'react-native'
+import { Dimensions, Platform, StatusBar, SafeAreaView, ViewStyle, StyleSheet } from 'react-native'
 import React from 'react'
-import { ScreenWrapperProps } from '@/types'
 import { colors } from '@/constants/theme'
+
+interface ScreenWrapperProps {
+	children: React.ReactNode;
+	style?: ViewStyle;
+}
 
 const { height } = Dimensions.get('window')
 
-const ScreenWrapper = ({ children, style }: ScreenWrapperProps) => {
-	let paddingTop = Platform.OS === 'ios' ? height * 0.06 : 50;
+const ScreenWrapper: React.FC<ScreenWrapperProps> = ({ children, style }) => {
+	// Calculate padding top based on platform
+	const paddingTop = Platform.OS === 'ios'
+		? height * 0.06
+		: StatusBar.currentHeight || 0;
+
 	return (
-		<View style={[{
-			paddingTop,
-			flex: 1,
-			backgroundColor: colors.neutral900,
-		},
-			style,
-		]}>
-			<StatusBar barStyle="light-content" />
+		<SafeAreaView style={[styles.container, { paddingTop }, style]}>
+			<StatusBar
+				barStyle="dark-content"
+				backgroundColor={colors.neutral900}
+				translucent
+			/>
 			{children}
-		</View>
+		</SafeAreaView>
 	)
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: colors.neutral900,
+	},
+})
 
 export default ScreenWrapper

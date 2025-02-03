@@ -70,11 +70,6 @@ const ProfileScreen = () => {
 						Hoa Nguyen Coder
 					</Text>
 					<Text style={styles.title}>Web Developer</Text>
-
-					<LinearGradient
-						colors={["#000", "#4c669f", "#FC7533"]}
-						style={styles.backgroundGradient}
-					/>
 				</View>
 
 				<ScrollView style={styles.menuContainer}>
@@ -127,15 +122,6 @@ const styles = StyleSheet.create({
 		color: colors.neutral300,
 		fontWeight: "bold",
 		marginTop: 4
-	},
-	backgroundGradient: {
-		position: "absolute",
-		top: -208,
-		left: -40,
-		width: "120%",
-		height: 550,
-		borderRadius: 275,
-		zIndex: -1
 	},
 	menuContainer: {
 		flex: 1,
