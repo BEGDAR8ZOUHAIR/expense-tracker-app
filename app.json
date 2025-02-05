@@ -10,14 +10,21 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.begdar8zouhair.expensetrackerapp"
+      "bundleIdentifier": "com.begdar8zouhair.expensetrackerapp",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "We need access to your photos to let you upload profile pictures."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.begdar8zouhair.expensetrackerapp"
+      "package": "com.begdar8zouhair.expensetrackerapp",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -33,6 +40,13 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "We need access to your photos to let you upload profile pictures.",
+          "cameraPermission": "We need access to your camera to let you take profile pictures."
         }
       ]
     ],

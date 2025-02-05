@@ -61,7 +61,7 @@ const Register = () => {
 				</View>
 				{/* button */}
 				<Button onPress={handleSumbit} loading={loading}>
-					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.neutral900}>Register</Typo>
+					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.text}>Register</Typo>
 				</Button>
 
 				{/* footer */}
@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
 		gap: spacingY._30,
 		paddingHorizontal: spacingX._20,
 		fontWeight: '700',
-		color: colors.text
+		color: colors.text,
+		marginVertical: spacingY._40
 	},
 	welcomeText: {
 		fontSize: verticalScale(20),

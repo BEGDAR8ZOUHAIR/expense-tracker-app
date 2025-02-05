@@ -1,5 +1,5 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Platform, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, Image, ScrollView, TouchableOpacity, Platform, StyleSheet, Alert } from "react-native";
+import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -8,12 +8,17 @@ import { colors } from "@/constants/theme";
 import Button from "@/components/Button";
 import Typo from "@/components/Typo";
 import { auth } from "@/config/firebase";
+import { pickImage } from "@/hooks/uploadImage";
+import { useAuth } from "@/contexts/authContext";
+import Loading from "@/components/Loading";
+import { getProfileImage } from "@/services/imagesService";
+import Animated, { FadeIn, FadeInDown, FadeInUp } from "react-native-reanimated";
 
 const MENU_ITEMS = [
 	{
 		icon: <AntDesign name="user" size={24} color={colors.primary} />,
 		title: "Edit Profile",
-		route: "editProfile"
+		route: "(modals)/profileModal"
 	},
 	{
 		icon: <MaterialIcons name="favorite-border" size={24} color={colors.primary} />,
@@ -36,17 +41,25 @@ const ProfileScreen = () => {
 	const router = useRouter();
 	const isIOS = Platform.OS === "ios";
 
+	const { user, uploadProfileImage } = useAuth();
+	const [uploading, setUploading] = useState(false);
+
+	const handleImagePick = async () => {
+	};
+
 	const handleLogout = async () => {
 		await auth.signOut();
 	};
 
 	const MenuItem = ({ icon, title, route }: any) => (
-		<TouchableOpacity onPress={() => router.push(route)}>
-			<View style={styles.menuItem}>
-				<View style={styles.menuIcon}>{icon}</View>
-				<Text style={styles.menuItemText}>{title}</Text>
-			</View>
-		</TouchableOpacity>
+		<Animated.View entering={FadeInDown.duration(1000).springify().damping(15)}>
+			<TouchableOpacity onPress={() => router.push(route)}>
+				<View style={styles.menuItem}>
+					<View style={styles.menuIcon}>{icon}</View>
+					<Text style={styles.menuItemText}>{title}</Text>
+				</View>
+			</TouchableOpacity>
+		</Animated.View>
 	);
 
 	return (
@@ -59,28 +72,42 @@ const ProfileScreen = () => {
 							style={styles.avatarGradient}
 						>
 							<Image
-								source={{ uri: "https://hoanguyenit.com/images/hoanguyencoder.jpg" }}
+								source={
+									getProfileImage(user?.image)
+								}
 								style={styles.avatar}
 								resizeMode="cover"
 							/>
+							{uploading && (
+								<View style={styles.uploadingOverlay}>
+									<Loading size="small" color={colors.neutral100} />
+								</View>
+							)}
 						</LinearGradient>
+						<Ionicons
+							name="camera"
+							size={24}
+							color={colors.neutral100}
+							onPress={handleImagePick}
+						/>
 					</View>
-
 					<Text style={[styles.name, { fontFamily: "HelvetIns" }]}>
-						Hoa Nguyen Coder
+						{user?.name}
 					</Text>
-					<Text style={styles.title}>Web Developer</Text>
+					<Text style={styles.title}>{user?.email}</Text>
 				</View>
 
 				<ScrollView style={styles.menuContainer}>
 					{MENU_ITEMS.map((item, index) => (
 						<MenuItem key={index} {...item} />
 					))}
-					<Button onPress={handleLogout} style={styles.logoutButton}>
-						<Typo fontWeight="700" color={colors.neutral900} size={16}>
-							Logout
-						</Typo>
-					</Button>
+					<Animated.View entering={FadeInUp.duration(1000).springify().damping(15)}>
+						<Button onPress={handleLogout} style={styles.logoutButton}>
+							<Typo fontWeight="700" color={colors.neutral900} size={16}>
+								Logout
+							</Typo>
+						</Button>
+					</Animated.View>
 				</ScrollView>
 			</View>
 		</ScreenWrapper>
@@ -144,7 +171,14 @@ const styles = StyleSheet.create({
 		width: "60%",
 		alignSelf: "center",
 		marginVertical: 20
-	}
+	},
+	uploadingOverlay: {
+		...StyleSheet.absoluteFillObject,
+		backgroundColor: colors.text,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 64,
+	},
 });
 
 export default ProfileScreen;

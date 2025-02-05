@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth, firestore } from '@/config/firebase';
 import { doc, getDoc, setDoc } from '@firebase/firestore';
 import { useRouter } from 'expo-router';
+import { uploadImageToFirebase } from '@/hooks/uploadImage';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -107,12 +108,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 		}
 	}
 
+	// upload profile image
+	// Add this function to your AuthProvider component
+	const uploadProfileImage = async (uri: string) => {
+		if (!user?.uid) return { success: false, msg: 'User not authenticated' };
+
+		const result = await uploadImageToFirebase(uri, user.uid);
+		if (result.success) {
+			await updateUserData(user.uid);
+		}
+		return result;
+	};
+
 	const contextValue: AuthContextType = {
 		user,
 		setUser,
 		login,
 		register,
-		updateUserData
+		updateUserData,
+		uploadProfileImage
 	}
 
 	return (

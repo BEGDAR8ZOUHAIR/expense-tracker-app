@@ -3,9 +3,11 @@ import React from 'react'
 import { Stack } from 'expo-router'
 import { AuthProvider } from '@/contexts/authContext';
 
-const _layout = () => {
+const StackLayout = () => {
 	return (
-		<Stack screenOptions={{ headerShown: false }}></Stack>
+		<Stack screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="(modals)/profileModal" options={{ presentation: 'modal' }} />
+		</Stack>
 	)
 };
 
@@ -13,9 +15,7 @@ const _layout = () => {
 export default function RootLayout() {
 	return (
 		<AuthProvider>
-			<Stack screenOptions={{ headerShown: false }}>
-				<Stack.Screen name="index" />
-			</Stack>
+			<StackLayout />
 		</AuthProvider>
 	);
 }

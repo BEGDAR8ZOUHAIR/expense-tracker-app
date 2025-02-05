@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: colors.neutral900,
+		marginTop: StatusBar.currentHeight || 0,
 	},
 })
 
