@@ -2,12 +2,11 @@ import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import ModalWrapper from '@/components/ModalWrapper'
 import BackButton from '@/components/BackButton'
-import { colors, spacingX, spacingY } from '@/constants/theme'
+import { colors, spacingY } from '@/constants/theme'
 import { scale, verticalScale } from '@/utils/styling'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Image } from 'react-native'
 import { getProfileImage } from "@/services/imagesService";
-import Loading from '@/components/Loading'
 import { useAuth } from '@/contexts/authContext'
 import { Ionicons } from '@expo/vector-icons'
 import Input from '@/components/Input'
@@ -24,19 +23,20 @@ const profileModal = () => {
 	const [userData, setUserData] = React.useState<UserDataType>({
 		name: '',
 		image: null,
-
 	});
 
-
-	const handleImagePick = async () => {
-	};
+	const handleImagePick = async () => { };
 
 	useEffect(() => {
-		setUserData({
-			image: user?.image || null,
-			name: user?.name || ''
-		})
-	})
+		if (user) {
+			setUserData(prevState => ({
+				...prevState,
+				image: user.image || null,
+				name: user.name || ''
+			}));
+		}
+	}, [user]); // Add the 'user' dependency
+
 	const handleSumbit = async () => {
 		let { name, image } = userData;
 		if (!name.trim()) {
@@ -51,8 +51,8 @@ const profileModal = () => {
 			await updateUserData(user?.uid as string);
 			router.back();
 		}
+	};
 
-	}
 	return (
 		<ModalWrapper style={styles.container}>
 			<BackButton />
@@ -62,9 +62,7 @@ const profileModal = () => {
 					style={styles.avatarGradient}
 				>
 					<Image
-						source={
-							getProfileImage(userData.image)
-						}
+						source={getProfileImage(userData.image)}
 						style={styles.avatar}
 						resizeMode="cover"
 					/>
@@ -79,7 +77,7 @@ const profileModal = () => {
 			<View style={{ gap: 5, marginTop: spacingY._20 }}>
 				<Input
 					icon={<Ionicons name="person" size={24} color={colors.neutral300} />}
-					onChangeText={(value) => setUserData({ ...userData, name: value })}
+					onChangeText={(value) => setUserData(prevState => ({ ...prevState, name: value }))}
 					value={userData.name}
 					placeholder='Name'
 				/>
@@ -91,15 +89,14 @@ const profileModal = () => {
 				</Button>
 			</View>
 		</ModalWrapper>
-	)
-}
+	);
+};
 
 export default profileModal
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-
 	},
 	avatarContainer: {
 		alignItems: "center"
@@ -121,10 +118,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "flex-end",
 		marginBottom: verticalScale(100)
-
 	}
-
-
-
-
 })

@@ -108,17 +108,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 		}
 	}
 
-	// upload profile image
-	// Add this function to your AuthProvider component
-	const uploadProfileImage = async (uri: string) => {
-		if (!user?.uid) return { success: false, msg: 'User not authenticated' };
 
-		const result = await uploadImageToFirebase(uri, user.uid);
-		if (result.success) {
-			await updateUserData(user.uid);
-		}
-		return result;
-	};
 
 	const contextValue: AuthContextType = {
 		user,
@@ -126,7 +116,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 		login,
 		register,
 		updateUserData,
-		uploadProfileImage
 	}
 
 	return (

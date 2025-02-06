@@ -154,7 +154,6 @@ export type AuthContextType = {
     name: string
   ) => Promise<{ success: boolean; msg?: string }>;
   updateUserData: (userId: string) => Promise<void>;
-  uploadProfileImage: (uri: string) => Promise<{ success: boolean; msg?: string }>;
 };
 
 export type ResponseType = {
