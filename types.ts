@@ -108,8 +108,9 @@ export interface InputProps extends TextInputProps {
   containerStyle?: ViewStyle;
   inputStyle?: TextStyle;
   inputRef?: React.RefObject<TextInput>;
-  //   label?: string;
-  //   error?: string;
+  value?: string | undefined;
+  label?: string;
+  error?: string;
 }
 
 export interface CustomButtonProps extends TouchableOpacityProps {

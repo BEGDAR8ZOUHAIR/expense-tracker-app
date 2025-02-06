@@ -1,21 +1,58 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react'
 import ModalWrapper from '@/components/ModalWrapper'
 import BackButton from '@/components/BackButton'
 import { colors, spacingX, spacingY } from '@/constants/theme'
-import { scale } from '@/utils/styling'
+import { scale, verticalScale } from '@/utils/styling'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Image } from 'react-native'
 import { getProfileImage } from "@/services/imagesService";
 import Loading from '@/components/Loading'
 import { useAuth } from '@/contexts/authContext'
 import { Ionicons } from '@expo/vector-icons'
+import Input from '@/components/Input'
+import Button from '@/components/Button'
+import Typo from '@/components/Typo'
+import { useRouter } from 'expo-router'
+import { UserDataType } from '@/types'
+import { updateUser } from '@/services/userService'
 
 const profileModal = () => {
-	const { user, uploadProfileImage } = useAuth();
+	const { user, updateUserData } = useAuth();
+	const [loading, setLoading] = React.useState(false);
+	const router = useRouter();
+	const [userData, setUserData] = React.useState<UserDataType>({
+		name: '',
+		image: null,
+
+	});
+
 
 	const handleImagePick = async () => {
 	};
+
+	useEffect(() => {
+		setUserData({
+			image: user?.image || null,
+			name: user?.name || ''
+		})
+	})
+	const handleSumbit = async () => {
+		let { name, image } = userData;
+		if (!name.trim()) {
+			Alert.alert('Error', 'Name is required');
+			return;
+		}
+
+		setLoading(true);
+		const res = await updateUser(user?.uid as string, userData);
+		setLoading(false);
+		if (res.success) {
+			await updateUserData(user?.uid as string);
+			router.back();
+		}
+
+	}
 	return (
 		<ModalWrapper style={styles.container}>
 			<BackButton />
@@ -26,7 +63,7 @@ const profileModal = () => {
 				>
 					<Image
 						source={
-							getProfileImage(user?.image)
+							getProfileImage(userData.image)
 						}
 						style={styles.avatar}
 						resizeMode="cover"
@@ -38,6 +75,20 @@ const profileModal = () => {
 					color={colors.neutral100}
 					onPress={handleImagePick}
 				/>
+			</View>
+			<View style={{ gap: 5, marginTop: spacingY._20 }}>
+				<Input
+					icon={<Ionicons name="person" size={24} color={colors.neutral300} />}
+					onChangeText={(value) => setUserData({ ...userData, name: value })}
+					value={userData.name}
+					placeholder='Name'
+				/>
+			</View>
+			{/* button */}
+			<View style={styles.buttonContainer}>
+				<Button onPress={handleSumbit} loading={loading}>
+					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.text}>Update Profile</Typo>
+				</Button>
 			</View>
 		</ModalWrapper>
 	)
@@ -65,7 +116,14 @@ const styles = StyleSheet.create({
 		width: scale(128),
 		height: scale(128),
 		borderRadius: scale(64)
+	},
+	buttonContainer: {
+		flex: 1,
+		justifyContent: "flex-end",
+		marginBottom: verticalScale(100)
+
 	}
+
 
 
 

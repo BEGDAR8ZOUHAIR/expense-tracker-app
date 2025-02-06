@@ -17,6 +17,7 @@ const Input = (props: InputProps) => {
 				ref={props.inputRef && props.inputRef}
 				placeholderTextColor={colors.neutral400}
 				{...props}
+				value={props.value}
 			/>
 
 		</View>
@@ -28,7 +29,7 @@ export default Input
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		height: verticalScale(54),
+		height: verticalScale(60),
 		alignItems: 'center',
 		justifyContent: 'center',
 		borderWidth: 1,
