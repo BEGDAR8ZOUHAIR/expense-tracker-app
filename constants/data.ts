@@ -1,5 +1,4 @@
 import { CategoryType, ExpenseCategoriesType } from "@/types";
-import { colors } from "./theme";
 
 import * as Icons from "phosphor-react-native"; // Import all icons dynamically
 

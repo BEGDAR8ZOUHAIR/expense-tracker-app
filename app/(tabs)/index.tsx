@@ -1,16 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import Button from '@/components/Button'
-import Typo from '@/components/Typo'
-import { auth } from '@/config/firebase'
 import { colors } from '@/constants/theme'
 import ProfileChip from '@/components/ProfileChip'
 import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@/contexts/authContext'
 
 const Home = () => {
-	const { user, updateUserData } = useAuth();
+	const { user } = useAuth();
 	return (
 		<ScreenWrapper>
 			<View style={styles.container}>

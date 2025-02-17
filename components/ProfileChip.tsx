@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { spacingX } from '@/constants/theme'
+import { colors, spacingX } from '@/constants/theme'
 import { scale } from '@/utils/styling'
 
 type Props = {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 	},
 	message: {
 		fontSize: 14,
-		color: '#666',
+		color: colors.neutral600,
 		fontWeight: '600',
 
 	},

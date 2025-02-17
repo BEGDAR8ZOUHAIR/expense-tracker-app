@@ -10,7 +10,6 @@ interface ScreenWrapperProps {
 const { height } = Dimensions.get('window')
 
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({ children, style }) => {
-	// Calculate padding top based on platform
 	const paddingTop = Platform.OS === 'ios'
 		? height * 0.06
 		: StatusBar.currentHeight || 0;
