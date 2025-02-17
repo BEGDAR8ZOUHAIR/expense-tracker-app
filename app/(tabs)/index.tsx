@@ -5,20 +5,31 @@ import Button from '@/components/Button'
 import Typo from '@/components/Typo'
 import { auth } from '@/config/firebase'
 import { colors } from '@/constants/theme'
+import ProfileChip from '@/components/ProfileChip'
+import { Ionicons } from '@expo/vector-icons'
+import { useAuth } from '@/contexts/authContext'
 
 const Home = () => {
-	const handleLogout = async () => {
-		await auth.signOut();
-	}
+	const { user, updateUserData } = useAuth();
 	return (
 		<ScreenWrapper>
-			<Button onPress={handleLogout}>
-				<Typo fontWeight={'700'} color={colors.neutral900} size={24}>Logout</Typo>
-			</Button>
+			<View style={styles.container}>
+				<ProfileChip
+					imageUrl={user?.image}
+					name={user?.name}
+					message="Hello"
+					rightIcon={<Ionicons name="notifications" size={24} color={colors.neutral800} />}
+				/>
+			</View>
 		</ScreenWrapper>
 	)
 }
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	}
+
+})

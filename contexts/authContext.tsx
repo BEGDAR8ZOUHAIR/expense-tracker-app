@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth, firestore } from '@/config/firebase';
 import { doc, getDoc, setDoc } from '@firebase/firestore';
 import { useRouter } from 'expo-router';
-import { uploadImageToFirebase } from '@/hooks/uploadImage';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
