@@ -11,7 +11,7 @@ const BackButton = ({ style, iconSize = 26 }: BackButtonProps
 	const router = useRouter();
 	return (
 		<TouchableOpacity style={[styles.backButton, style]} onPress={() => router.back()}>
-			<Ionicons name="arrow-back" size={iconSize} color={colors.neutral800} />
+			<Ionicons name="arrow-back" size={iconSize} color={colors.neutral100} />
 		</TouchableOpacity>
 	)
 }
@@ -20,9 +20,9 @@ export default BackButton
 
 const styles = StyleSheet.create({
 	backButton: {
-		backgroundColor: colors.neutral600,
+		backgroundColor: colors.neutral500,
 		alignSelf: 'flex-start',
-		borderRadius: radius._12,
+		borderRadius: radius._10,
 		borderCurve: 'continuous',
 		padding: verticalScale(5),
 	}

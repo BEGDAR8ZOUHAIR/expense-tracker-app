@@ -31,7 +31,7 @@ export default Button
 
 const styles = StyleSheet.create({
 	button: {
-		height: verticalScale(50),
+		height: verticalScale(60),
 		borderRadius: radius._17,
 		borderCurve: 'continuous',
 		backgroundColor: colors.primary,

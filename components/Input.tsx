@@ -29,7 +29,7 @@ export default Input
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		height: verticalScale(70),
+		height: verticalScale(60),
 		alignItems: 'center',
 		justifyContent: 'center',
 		borderWidth: 1.5,

@@ -10,7 +10,7 @@ const ModalWrapper = (
 	{
 		style,
 		children,
-		bg = colors.neutral800
+		bg = colors.text
 	}: ModalWrapperProps
 ) => {
 	return (

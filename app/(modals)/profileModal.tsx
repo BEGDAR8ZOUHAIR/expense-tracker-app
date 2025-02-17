@@ -116,11 +116,11 @@ const ProfileModal = () => {
 					<Ionicons
 						name="camera"
 						size={24}
-						color={colors.neutral800}
+						color={colors.text}
 					/>
 				</TouchableOpacity>
 			</View>
-			<View style={{ gap: 5, marginTop: spacingY._20 }}>
+			<View style={{ gap: spacingY._10, marginTop: spacingY._30 }}>
 				<Input
 					icon={<Ionicons name="person" size={24} color={colors.neutral800} />}
 					onChangeText={(value) => setUserData(prevState => ({ ...prevState, name: value }))}
@@ -130,7 +130,7 @@ const ProfileModal = () => {
 			</View>
 			<View style={styles.buttonContainer}>
 				<Button onPress={handleSumbit} loading={loading}>
-					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.neutral800}>
+					<Typo size={verticalScale(16)} fontWeight={'800'} color={colors.neutral100}>
 						Update Profile
 					</Typo>
 				</Button>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
 		borderRadius: scale(64),
 	},
 	iconContainer: {
-		backgroundColor: colors.neutral600,
+		backgroundColor: colors.neutral500,
 		borderRadius: scale(64),
 		padding: scale(8),
 		position: "absolute",
@@ -173,6 +173,6 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		flex: 1,
 		justifyContent: "flex-end",
-		marginBottom: verticalScale(100)
+		marginBottom: verticalScale(100),
 	}
 })
