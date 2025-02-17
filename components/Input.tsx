@@ -15,7 +15,7 @@ const Input = (props: InputProps) => {
 			<TextInput
 				style={[styles.input, props.inputStyle]}
 				ref={props.inputRef && props.inputRef}
-				placeholderTextColor={colors.neutral400}
+				placeholderTextColor={colors.neutral800}
 				{...props}
 				value={props.value}
 			/>
@@ -29,11 +29,11 @@ export default Input
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		height: verticalScale(60),
+		height: verticalScale(70),
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderWidth: 1,
-		borderColor: colors.neutral300,
+		borderWidth: 1.5,
+		borderColor: colors.neutral800,
 		borderRadius: radius._17,
 		borderCurve: 'continuous',
 		paddingHorizontal: spacingX._15,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		flex: 1,
-		color: colors.white,
-		fontSize: verticalScale(14),
+		color: colors.neutral800,
+		fontSize: verticalScale(18),
 	}
 })

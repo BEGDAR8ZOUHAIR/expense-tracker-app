@@ -1,7 +1,13 @@
+import { Platform, StyleSheet } from 'react-native';
 import { scale, verticalScale } from "@/utils/styling";
 
+// Default text style that will be applied app-wide
+const defaultText = {
+  fontFamily: "Quicksand-Regular",
+};
+
 export const colors = {
-  primary: "#a3e635",
+  primary: "#16a34a",
   primaryLight: "#0ea5e9",
   primaryDark: "#0369a1",
   text: "#fff",
@@ -14,14 +20,121 @@ export const colors = {
   neutral50: "#fafafa",
   neutral100: "#f5f5f5",
   neutral200: "#e5e5e5",
-  neutral300: "#d4d4d4",
   neutral350: "#CCCCCC",
   neutral400: "#a3a3a3",
   neutral500: "#737373",
   neutral600: "#525252",
   neutral700: "#404040",
   neutral800: "#262626",
-  neutral900: "#171717",
+  neutral900: "#f5f5f5",
+};
+
+export const englishFonts = {
+  displaySmall: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 28,
+    letterSpacing: 0,
+    lineHeight: 44,
+  },
+  displayMedium: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 30,
+    letterSpacing: 0,
+    lineHeight: 52,
+  },
+  displayLarge: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 30,
+    letterSpacing: 0,
+    lineHeight: 64,
+  },
+  headlineLarge: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 28,
+    letterSpacing: 0,
+    lineHeight: 40,
+  },
+  headlineMedium: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 25,
+    letterSpacing: 0,
+    lineHeight: 36,
+  },
+  headlineSmall: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 22,
+    letterSpacing: 0,
+    lineHeight: 32,
+  },
+  titleLarge: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 22,
+    letterSpacing: 0,
+    lineHeight: 28,
+  },
+  titleMedium: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 16,
+    letterSpacing: 0,
+    lineHeight: 24,
+  },
+  titleSmall: {
+    ...defaultText,
+    fontFamily: "Quicksand-Bold",
+    fontSize: 14,
+    letterSpacing: 0,
+    lineHeight: 20,
+  },
+  labelLarge: {
+    ...defaultText,
+    fontFamily: "Quicksand-SemiBold",
+    fontSize: 14,
+    letterSpacing: 0,
+    lineHeight: 20,
+  },
+  labelMedium: {
+    ...defaultText,
+    fontFamily: "Quicksand-SemiBold",
+    fontSize: 12,
+    letterSpacing: 0,
+    lineHeight: 16,
+  },
+  labelSmall: {
+    ...defaultText,
+    fontFamily: "Quicksand-SemiBold",
+    fontSize: 11,
+    letterSpacing: 0,
+    lineHeight: 16,
+  },
+  bodyLarge: {
+    ...defaultText,
+    fontFamily: "Quicksand-Medium",
+    fontSize: 16,
+    letterSpacing: 0,
+    lineHeight: 24,
+  },
+  bodyMedium: {
+    ...defaultText,
+    fontFamily: "Quicksand-Medium",
+    fontSize: 14,
+    letterSpacing: 0,
+    lineHeight: 20,
+  },
+  bodySmall: {
+    ...defaultText,
+    fontFamily: "Quicksand-Medium",
+    fontSize: 12,
+    letterSpacing: 0,
+    lineHeight: 16,
+  },
 };
 
 export const spacingX = {
@@ -64,3 +177,11 @@ export const radius = {
   _20: verticalScale(20),
   _30: verticalScale(30),
 };
+
+// Default styles that can be applied app-wide
+export const defaultStyles = StyleSheet.create({
+  text: defaultText,
+  container: {
+    flex: 1,
+  },
+});

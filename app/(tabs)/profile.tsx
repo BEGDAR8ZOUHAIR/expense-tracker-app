@@ -1,5 +1,5 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Platform, StyleSheet, Alert } from "react-native";
-import React, { useState } from "react";
+import { View, Text, Image, ScrollView, TouchableOpacity, Platform, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -8,11 +8,10 @@ import { colors } from "@/constants/theme";
 import Button from "@/components/Button";
 import Typo from "@/components/Typo";
 import { auth } from "@/config/firebase";
-import { pickImage } from "@/hooks/uploadImage";
 import { useAuth } from "@/contexts/authContext";
-import Loading from "@/components/Loading";
 import { getProfileImage } from "@/services/imagesService";
-import Animated, { FadeIn, FadeInDown, FadeInUp } from "react-native-reanimated";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import { UserDataType } from "@/types";
 
 const MENU_ITEMS = [
 	{
@@ -40,16 +39,39 @@ const MENU_ITEMS = [
 const ProfileScreen = () => {
 	const router = useRouter();
 	const isIOS = Platform.OS === "ios";
-
-	const { user, uploadProfileImage } = useAuth();
-	const [uploading, setUploading] = useState(false);
-
-	const handleImagePick = async () => {
-	};
+	const { user, updateUserData } = useAuth();
+	const [userData, setUserData] = useState<UserDataType>({
+		name: '',
+		image: null,
+	})
 
 	const handleLogout = async () => {
 		await auth.signOut();
 	};
+
+	useEffect(() => {
+		if (user) {
+			setUserData(prevState => ({
+				...prevState,
+				image: user.image || null,
+				name: user.name || ''
+			}))
+		}
+	}, [user])
+
+	const renderProfileImage = () => {
+		const imageSource = userData.image
+			? { uri: typeof userData.image === 'string' ? userData.image : userData.image.uri }
+			: getProfileImage(null)
+
+		return (
+			<Image
+				source={imageSource}
+				style={styles.avatar}
+				resizeMode="cover"
+			/>
+		)
+	}
 
 	const MenuItem = ({ icon, title, route }: any) => (
 		<Animated.View entering={FadeInDown.duration(1000).springify().damping(15)}>
@@ -71,25 +93,8 @@ const ProfileScreen = () => {
 							colors={["#4c669f", "#FC7533", colors.primary]}
 							style={styles.avatarGradient}
 						>
-							<Image
-								source={
-									getProfileImage(user?.image)
-								}
-								style={styles.avatar}
-								resizeMode="cover"
-							/>
-							{uploading && (
-								<View style={styles.uploadingOverlay}>
-									<Loading size="small" color={colors.neutral100} />
-								</View>
-							)}
+							{renderProfileImage()}
 						</LinearGradient>
-						<Ionicons
-							name="camera"
-							size={24}
-							color={colors.neutral100}
-							onPress={handleImagePick}
-						/>
 					</View>
 					<Text style={[styles.name, { fontFamily: "HelvetIns" }]}>
 						{user?.name}
@@ -141,12 +146,12 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 24,
-		color: colors.text,
+		color: colors.neutral800,
 		marginTop: 16
 	},
 	title: {
 		fontSize: 20,
-		color: colors.neutral300,
+		color: colors.neutral800,
 		fontWeight: "bold",
 		marginTop: 4
 	},
@@ -165,7 +170,7 @@ const styles = StyleSheet.create({
 	},
 	menuItemText: {
 		fontSize: 20,
-		color: colors.text
+		color: colors.neutral800
 	},
 	logoutButton: {
 		width: "60%",
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
 	},
 	uploadingOverlay: {
 		...StyleSheet.absoluteFillObject,
-		backgroundColor: colors.text,
+		backgroundColor: colors.neutral800,
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: 64,

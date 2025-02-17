@@ -8,7 +8,7 @@ const Typo = (
 	{
 		children,
 		size,
-		color = colors.text,
+		color = colors.neutral800,
 		fontWeight = '400',
 		style,
 		textProps = {}

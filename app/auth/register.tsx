@@ -43,17 +43,17 @@ const Register = () => {
 				{/* form */}
 				<View style={styles.form}>
 					<Input
-						icon={<Ionicons name="person" size={24} color={colors.neutral300} />}
+						icon={<Ionicons name="person" size={24} color={colors.neutral800} />}
 						placeholder='Enter your Name'
 						onChangeText={(value) => (nameRef.current = value)}
 					/>
 					<Input
-						icon={<Ionicons name="mail" size={24} color={colors.neutral300} />}
+						icon={<Ionicons name="mail" size={24} color={colors.neutral800} />}
 						placeholder='Enter your email'
 						onChangeText={(value) => (emailRef.current = value)}
 					/>
 					<Input
-						icon={<Ionicons name="lock-closed" size={24} color={colors.neutral300} />}
+						icon={<Ionicons name="lock-closed" size={24} color={colors.neutral800} />}
 						placeholder='Enter your password'
 						secureTextEntry
 						onChangeText={(value) => (passordRef.current = value)}
@@ -61,7 +61,7 @@ const Register = () => {
 				</View>
 				{/* button */}
 				<Button onPress={handleSumbit} loading={loading}>
-					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.text}>Register</Typo>
+					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.neutral800}>Register</Typo>
 				</Button>
 
 				{/* footer */}
@@ -84,13 +84,13 @@ const styles = StyleSheet.create({
 		gap: spacingY._30,
 		paddingHorizontal: spacingX._20,
 		fontWeight: '700',
-		color: colors.text,
+		color: colors.neutral800,
 		marginVertical: spacingY._40
 	},
 	welcomeText: {
 		fontSize: verticalScale(20),
 		fontWeight: '700',
-		color: colors.text
+		color: colors.neutral800
 	},
 	form: {
 		gap: spacingY._20
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 	forgotPassword: {
 		textAlign: 'right',
 		fontWeight: '500',
-		color: colors.text
+		color: colors.neutral800
 	},
 	footer: {
 		flexDirection: 'row',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
 	},
 	footerText: {
 		textAlign: 'center',
-		color: colors.text,
+		color: colors.neutral800,
 		fontSize: verticalScale(14)
 	},
 	footerLinkText: {

@@ -116,13 +116,13 @@ const ProfileModal = () => {
 					<Ionicons
 						name="camera"
 						size={24}
-						color={colors.text}
+						color={colors.neutral800}
 					/>
 				</TouchableOpacity>
 			</View>
 			<View style={{ gap: 5, marginTop: spacingY._20 }}>
 				<Input
-					icon={<Ionicons name="person" size={24} color={colors.neutral300} />}
+					icon={<Ionicons name="person" size={24} color={colors.neutral800} />}
 					onChangeText={(value) => setUserData(prevState => ({ ...prevState, name: value }))}
 					value={userData.name}
 					placeholder='Name'
@@ -130,7 +130,7 @@ const ProfileModal = () => {
 			</View>
 			<View style={styles.buttonContainer}>
 				<Button onPress={handleSumbit} loading={loading}>
-					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.text}>
+					<Typo size={verticalScale(16)} fontWeight={'500'} color={colors.neutral800}>
 						Update Profile
 					</Typo>
 				</Button>
