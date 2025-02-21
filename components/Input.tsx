@@ -18,6 +18,8 @@ const Input = (props: InputProps) => {
 				placeholderTextColor={colors.neutral800}
 				{...props}
 				value={props.value}
+				autoCorrect={false}
+				autoCapitalize='none'
 			/>
 
 		</View>

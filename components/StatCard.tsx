@@ -8,26 +8,33 @@ import { colors, radius, spacingX } from '@/constants/theme'
 type Props = {
 	type: 'Income' | 'Expense'
 	amount: number
-	icon?: any
 	containerStyle?: any
 }
 
-const StatCard = ({ type, amount, icon, containerStyle }: Props) => {
+const StatCard = ({ type, amount, containerStyle }: Props) => {
 	return (
 		<View style={[styles.container, containerStyle]}>
-			{icon && (
-				<View
-					style={[
-						styles.iconContainer,
-						{ backgroundColor: type === 'Income' ? colors.green : colors.rose }
-					]}
-				>
-					<FontAwesome name={{ 'Income': 'arrow-up', 'Expense': 'arrow-down' }[type]} size={20} color={colors.white} />
-				</View>
-			)}
+			<View
+				style={[
+					styles.iconContainer,
+					{ backgroundColor: type === 'Income' ? colors.green : colors.rose }
+				]}
+			>
+				<FontAwesome
+					name={{ 'Income': 'arrow-up', 'Expense': 'arrow-down' }[type] as any}
+					size={20}
+					color={colors.white}
+				/>
+			</View>
 			<View style={styles.textContainer}>
-				<Typo fontWeight={'500'} style={styles.typeText}>{type}</Typo>
-				<Typo fontWeight={'500'} style={styles.amountText} color={type === 'Income' ? colors.green : colors.rose} size={12}> ${amount.toFixed(2)}</Typo>
+				<Typo fontWeight={'500'} style={styles.typeText}>
+					{type}
+				</Typo>
+				<Typo fontWeight={'500'} style={styles.amountText}
+					color={type === 'Income' ? colors.green : colors.rose}
+					size={12}>
+					${amount.toFixed(2)}
+				</Typo>
 			</View>
 		</View>
 	)

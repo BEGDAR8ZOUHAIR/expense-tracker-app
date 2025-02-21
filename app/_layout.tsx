@@ -1,6 +1,7 @@
 import React from 'react'
 import { Stack } from 'expo-router'
 import { AuthProvider } from '@/contexts/authContext';
+import { WalletProvider } from '@/contexts/wallet';
 
 const StackLayout = () => {
 	return (
@@ -14,7 +15,9 @@ const StackLayout = () => {
 export default function RootLayout() {
 	return (
 		<AuthProvider>
-			<StackLayout />
+			<WalletProvider>
+				<StackLayout />
+			</WalletProvider>
 		</AuthProvider>
 	);
 }
