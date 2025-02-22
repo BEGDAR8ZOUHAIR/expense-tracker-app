@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { colors, spacingX } from '@/constants/theme'
@@ -8,6 +8,10 @@ import { useAuth } from '@/contexts/authContext'
 import StatCard from '@/components/StatCard'
 import Typo from '@/components/Typo'
 import { useWallet } from '@/contexts/wallet'
+import { FloatingAction } from "react-native-floating-action";
+import { router } from 'expo-router'
+
+
 
 const Home = () => {
 	const { user } = useAuth();
@@ -62,6 +66,13 @@ const Home = () => {
 						/>
 					</View>
 				</View>
+				<TouchableOpacity
+					style={styles.addButton}
+					onPress={() => router.push('/(transactions)/addTransaction')}
+				>
+					<Ionicons name="add" size={24} color={colors.white} />
+				</TouchableOpacity>
+
 			</View>
 		</ScreenWrapper>
 	)
@@ -88,5 +99,17 @@ const styles = StyleSheet.create({
 	stateCards: {
 		flexDirection: 'row',
 		gap: 10,
-	}
+	},
+	addButton: {
+		position: 'absolute',
+		bottom: 100,
+		right: 20,
+		width: 60,
+		height: 60,
+		backgroundColor: colors.primary,
+		borderRadius: 30,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
 })
