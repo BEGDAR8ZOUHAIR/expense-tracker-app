@@ -9,6 +9,7 @@ import { colors } from '@/constants/theme';
 import { verticalScale } from '@/utils/styling';
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Divider } from 'react-native-paper';
 
 const defaultFormFields = [
 	{
@@ -62,11 +63,14 @@ const AddTransaction = () => {
 					loading={loading}
 					onSave={handleSave}
 				/>
+				<View style={styles.tabContainer} >
+					<AnimatedTabs
+						selectedTab={transactionType}
+						onTabChange={handleTabChange}
+					/>
+				</View>
 
-				<AnimatedTabs
-					selectedTab={transactionType}
-					onTabChange={handleTabChange}
-				/>
+				<Divider />
 
 				<View style={styles.formContainer}>
 					<TransactionForm formFields={defaultFormFields} />
@@ -86,7 +90,7 @@ const AddTransaction = () => {
 					</Typo>
 					<Typo
 						size={32}
-						color={transactionType === 'income' ? colors.green500 : colors.red500}
+						color={transactionType === 'income' ? colors.green : colors.rose}
 						style={styles.amountText}
 						fontWeight="600"
 					>
@@ -105,6 +109,9 @@ const AddTransaction = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+	},
+	tabContainer: {
+		paddingVertical: verticalScale(16),
 	},
 	formContainer: {
 		paddingVertical: verticalScale(16),

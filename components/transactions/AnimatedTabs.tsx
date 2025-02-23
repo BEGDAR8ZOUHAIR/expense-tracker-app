@@ -6,11 +6,12 @@ import Animated, {
 	useSharedValue,
 	withSpring,
 } from 'react-native-reanimated';
-import { colors } from '@/constants/theme';
+import { colors, spacingX, spacingY } from '@/constants/theme';
 import Typo from '../Typo';
+import { verticalScale } from '@/utils/styling';
 
 const { width } = Dimensions.get('window');
-const TAB_WIDTH = width * 0.4;
+const TAB_WIDTH = width * 0.45;
 
 interface AnimatedTabsProps {
 	selectedTab: 'income' | 'expense';
@@ -64,12 +65,14 @@ const AnimatedTabs: React.FC<AnimatedTabsProps> = ({ selectedTab, onTabChange })
 const styles = StyleSheet.create({
 	container: {
 		position: 'relative',
-		height: 48,
+		height: verticalScale(60),
 		backgroundColor: colors.neutral100,
-		borderRadius: 24,
+		borderRadius: 26,
 		flexDirection: 'row',
-		marginHorizontal: 20,
-		marginBottom: 20,
+		marginHorizontal: spacingX._15,
+		marginBottom: verticalScale(16),
+		borderWidth: 1.5,
+		borderColor: colors.neutral200,
 	},
 	tabsContainer: {
 		flexDirection: 'row',
