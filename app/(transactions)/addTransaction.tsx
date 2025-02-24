@@ -90,7 +90,7 @@ const AddTransaction = () => {
 					</Typo>
 					<Typo
 						size={32}
-						color={transactionType === 'income' ? colors.green : colors.rose}
+						color={transactionType === 'income' ? colors.primary : colors.rose}
 						style={styles.amountText}
 						fontWeight="600"
 					>
@@ -122,14 +122,14 @@ const styles = StyleSheet.create({
 	},
 	amountLabel: {
 		fontFamily: "Quicksand-Bold",
-		fontSize: 16,
+		fontSize: 18,
 		lineHeight: 24,
 		color: colors.neutral600,
+		marginBottom: verticalScale(8),
 	},
 	amountText: {
 		fontFamily: "Quicksand-Bold",
-		fontSize: 40,
-		lineHeight: 48,
+		fontSize: 50,
 	},
 });
 

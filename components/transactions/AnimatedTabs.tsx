@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 	container: {
 		position: 'relative',
 		height: verticalScale(60),
-		backgroundColor: colors.neutral100,
+		backgroundColor: colors.lightGreen,
 		borderRadius: 26,
 		flexDirection: 'row',
 		marginHorizontal: spacingX._15,
