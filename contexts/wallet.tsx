@@ -3,7 +3,7 @@ import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs } fro
 import { firestore } from '@/config/firebase';
 import { useAuth } from './authContext';
 
-type WalletType = {
+export type WalletType = {
 	id?: string;
 	name: string;
 	amount?: number;
@@ -14,6 +14,20 @@ type WalletType = {
 	created?: Date;
 };
 
+// Add these types
+type TransactionType = 'income' | 'expense';
+
+type TransactionData = {
+	amount: number;
+	type: TransactionType;
+	date: Date;
+	category?: string;
+	note?: string;
+	image?: any;
+	walletId: string;
+};
+
+
 type WalletContextType = {
 	wallet: WalletType | null;
 	wallets: WalletType[];
@@ -22,6 +36,7 @@ type WalletContextType = {
 	updateWallet: (walletId: string, data: Partial<WalletType>) => Promise<{ success: boolean; msg?: string }>;
 	fetchWallets: () => Promise<void>;
 	getWalletById: (walletId: string) => Promise<WalletType | null>;
+	addTransaction: (data: TransactionData) => Promise<{ success: boolean; msg?: string }>;
 };
 
 const WalletContext = createContext<WalletContextType | null>(null);
@@ -126,6 +141,50 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 		}
 	};
 
+	const addTransaction = async (data: TransactionData) => {
+		try {
+			if (!user?.uid) throw new Error('User not authenticated');
+
+			const walletRef = doc(firestore, 'wallets', data.walletId);
+			const walletDoc = await getDoc(walletRef);
+
+			if (!walletDoc.exists()) {
+				throw new Error('Wallet not found');
+			}
+
+			const currentWallet = walletDoc.data() as WalletType;
+			const updatedWallet: Partial<WalletType> = {
+				amount: currentWallet.amount || 0,
+				totalIncome: currentWallet.totalIncome || 0,
+				totalExpenses: currentWallet.totalExpenses || 0,
+			};
+
+			if (data.type === 'income') {
+				updatedWallet.amount = (currentWallet.amount || 0) + data.amount;
+				updatedWallet.totalIncome = (currentWallet.totalIncome || 0) + data.amount;
+			} else {
+				updatedWallet.amount = (currentWallet.amount || 0) - data.amount;
+				updatedWallet.totalExpenses = (currentWallet.totalExpenses || 0) + data.amount;
+			}
+
+			// Update the wallet
+			await updateWallet(data.walletId, updatedWallet);
+
+			// Store the transaction in a separate collection
+			const transactionRef = doc(collection(firestore, 'transactions'));
+			await setDoc(transactionRef, {
+				...data,
+				uid: user.uid,
+				created: new Date(),
+			});
+
+			return { success: true };
+		} catch (error: any) {
+			console.error("Error adding transaction:", error);
+			return { success: false, msg: error.message };
+		}
+	};
+
 	const contextValue: WalletContextType = {
 		wallet,
 		wallets,
@@ -134,6 +193,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 		updateWallet,
 		fetchWallets,
 		getWalletById,
+		addTransaction
 	};
 
 	return (

@@ -15,6 +15,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@devvie/bottom-sheet": "^0.4.3",
     "@expo/vector-icons": "^14.0.2",
     "@firebase/firestore": "^4.7.6",
     "@gorhom/bottom-sheet": "^5.1.1",
